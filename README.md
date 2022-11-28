@@ -17,44 +17,7 @@ Using the [Syncfusion xlsio](https://www.syncfusion.com/flutter-widgets/excel-li
 
 ## Creating an excel document based on the appointments data
 
-By using the Workbook and WorkSheet, you can create an excel document based on the appointment data.
-
-```
-
-leading: IconButton(
-          icon: const Icon(Icons.import_export),
-          onPressed: () async {
-            final Workbook workbook = Workbook();
-            final Worksheet sheet = workbook.worksheets[0];
-            sheet.getRangeByIndex(1, 1).setText('Id');
-            sheet.getRangeByIndex(1, 2).setText('Subject');
-            sheet.getRangeByIndex(1, 3).setText('Start Time');
-            sheet.getRangeByIndex(1, 4).setText('End Time');
-            int row = 2;
-            for(int i = 0;i<_dataSource.appointments!.length;i++){
-              int column = 1;
-              final Appointment appointment = _dataSource.appointments![i];
-              sheet.getRangeByIndex(row, column).setValue(i+1);
-              column++;
-              sheet.getRangeByIndex(row, column).setText(appointment.subject);
-              column++;
-              sheet.getRangeByIndex(row, column).setDateTime(appointment.startTime);
-              column++;
-              sheet.getRangeByIndex(row, column).setDateTime(appointment.endTime);
-              row++;
-            }
-            final List<int> bytes = workbook.saveAsStream();
-            workbook.dispose();
-
-            AnchorElement(
-                href:
-                "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}")
-              ..setAttribute("download", "output.xlsx")
-              ..click();
-          },
-        ),
-
-```
+By using the Workbook and WorkSheet, you can create an excel document based on the appointment data. Here by using the getRangeByIndex from the WorkSheet the calendar appointment data have been stored in an excel document.
 
 ## Requirements to run the demo
 * [VS Code](https://code.visualstudio.com/download)
